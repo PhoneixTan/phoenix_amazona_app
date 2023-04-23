@@ -25,3 +25,12 @@
 /*  !*  )*!*/
 /*  !*  rgb(var(--background-start-rgb));*!*/
 /*}*/
+
+.card{
+  /* margin-botton:20px;设置显示块，创建一个圆形 border-radius:8px;使用边框；边框设置为灰色200；创建中间阴影*/
+  @apply mb-5 block rounded-lg border border-gray-200 shadow-md
+}
+
+.primary-button{
+  @apply rounded bg-amber-300 py-2 px-4 shadow outline-none hover:bg-amber-400 active:bg-amber-500
+}
