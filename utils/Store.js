@@ -1,11 +1,16 @@
 import { createContext,useReducer } from "react";
-
+import Cookies from "js-cookie";
 export const Store=createContext();
 
 
 //  默认情况下购物车为空
 const initialState={
-    cart:{cartItems:[]},
+    //from empty array to value from cookie to get value
+    // cart:{cartItems:[]},
+    //在cookie中只能保存一个字符串，使用JSON.parse 转化cookie中的一个js对象
+    //在CART_ADD_ITEM 更新
+    cart:Cookies.get('cart')?JSON.parse(Cookies.get('cart')):
+    { cartItems:[]},
 
 };
 
@@ -23,6 +28,7 @@ function reducer(state,action){
             item.name === existItem.name ? newItem :item
             ):
             [...state.cart.cartItems,newItem];
+            Cookies.set('cart',JSON.stringify({...state.cart,cartItems}))
             return {...state,cart:{...state.cart,cartItems}
             }
            
@@ -34,6 +40,7 @@ function reducer(state,action){
                     //基于item的slug退回
                     (item)=>item.slug !==action.payload.slug
                 );
+            Cookies.set('cart',JSON.stringify({...state.cart,cartItems}))
                 //返回购物车中先前的状态，通过这一行更新context状态
                 return {...state,cart:{...state.cart,cartItems}}
             }

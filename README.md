@@ -65,3 +65,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## handle changing cart items
 1.add selext box for quantity
 2.handle select box change
+
+## Save cart items
+保存购物车列表
+1.install js-cookie package（npm install js-cookie）
+2.sava and retrevie cart items in cookies
