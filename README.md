@@ -56,3 +56,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 5.show add to cart action on third column
 6.add styles
 
+## cart page
+1.create cart.js
+2.use context to get cart items
+3.list items in cart items
+4.redirect to cart screen after add to cart
+
