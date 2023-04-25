@@ -5,12 +5,14 @@ import XCircleIcon from '@heroicons/react/24/outline/XCircleIcon';
 import Layout from '../components/Layout';
 import { Store } from '../utils/Store';
 import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+// import axios from 'axios';
+// import { toast } from 'react-toastify';
+
+
 
 export default function CartScreen() {
   const router = useRouter();
+
   const { state, dispatch } = useContext(Store);
   const {
     cart: { cartItems },
@@ -29,11 +31,11 @@ export default function CartScreen() {
   };
   return (
     <Layout title="Shopping Cart">
-      <h1 className="mb-4 text-xl">Shopping Cart</h1>
+      <h1 className="mb-4 text-xl">购物车</h1>
       {
       cartItems.length === 0 ? (
         <div>
-          Cart is empty. <Link href="/">Go shopping</Link>
+          购物车是空的， <Link href="/">快去购物吧！</Link>
         </div>
       ) : (
         <div className="grid md:grid-cols-4 md:gap-5">
@@ -41,10 +43,10 @@ export default function CartScreen() {
             <table className="min-w-full ">
               <thead className="border-b">
                 <tr>
-                  <th className="p-5 text-left">Item</th>
-                  <th className="p-5 text-right">Quantity</th>
-                  <th className="p-5 text-right">Price</th>
-                  <th className="p-5">Action</th>
+                  <th className="p-5 text-left">商品</th>
+                  <th className="p-5 text-right">数量</th>
+                  <th className="p-5 text-right">价格</th>
+                  <th className="p-5">删除</th>
                 </tr>
               </thead>
               <tbody>
@@ -60,11 +62,8 @@ export default function CartScreen() {
                           alt={item.name}
                           width={50}
                           height={50}
-                          style={{
-                            maxWidth: '100%',
-                            height: 'auto',
-                          }}
                         ></Image>
+                        &nbsp;
                         {item.name}
                       </Link>
                     </td>
@@ -82,10 +81,11 @@ export default function CartScreen() {
                         ))}
                       </select>
                     </td>
+                    
                     <td className="p-5 text-right">${item.price}</td>
                     <td className="p-5 text-center">
                       <button onClick={() => removeItemHandler(item)}>
-                        <XCircleIcon className="h-5 w-5"></XCircleIcon>
+                        <XCircleIcon className="h-5 w-5"></XCircleIcon>  
                       </button>
                     </td>
                   </tr>
@@ -93,11 +93,13 @@ export default function CartScreen() {
               </tbody>
             </table>
           </div>
+          {/* 统计 */}
           <div className="card p-5">
             <ul>
               <li>
                 <div className="pb-3 text-xl">
-                  Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) : $
+                  {/* cartItems.reduce累加器，项目求和 */}
+                 共({cartItems.reduce((a, c) => a + c.quantity, 0)}) : ¥
                   {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
                 </div>
               </li>
@@ -106,7 +108,7 @@ export default function CartScreen() {
                   onClick={() => router.push('login?redirect=/shipping')}
                   className="primary-button w-full"
                 >
-                  Check Out
+                  结账
                 </button>
               </li>
             </ul>
@@ -117,4 +119,4 @@ export default function CartScreen() {
   );
 }
 
-export default dynamic(() => Promise.resolve(CartScreen), { ssr: false });
+

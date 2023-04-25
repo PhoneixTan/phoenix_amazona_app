@@ -25,7 +25,18 @@ function reducer(state,action){
             [...state.cart.cartItems,newItem];
             return {...state,cart:{...state.cart,cartItems}
             }
+           
         }
+        //删除状态
+        case 'CART_REMOVE_ITEM':{
+            //filer 筛选列表
+                const cartItems=state.cart.cartItems.filter(
+                    //基于item的slug退回
+                    (item)=>item.slug !==action.payload.slug
+                );
+                //返回购物车中先前的状态，通过这一行更新context状态
+                return {...state,cart:{...state.cart,cartItems}}
+            }
         //对于默认情况，仅返回状态，reducer函数
         default:
             return state;
