@@ -62,3 +62,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 3.list items in cart items
 4.redirect to cart screen after add to cart
 
+## handle changing cart items
+1.add selext box for quantity
+2.handle select box change
